@@ -20,7 +20,7 @@ else:
             if fnmatch.fnmatch(basename, my_folder):
                 my_dirname = os.path.join(dirpath, basename)
                 for dirpath, dirnames, filenames in os.walk(my_dirname):
-                    list_of_files = [os.path.join(dirpath, i) for i in filenames if 'Asia Prod' in i or 'NA Prod' in i]
+                    list_of_files = [os.path.join(dirpath, i) for i in filenames if 'Asia' in i or 'NA' in i]
                 try:
                     combined_file = open(os.path.join(my_dirname, my_combined_file), 'w')
                     combined_file.write('Source IP,Environment\n')
@@ -39,9 +39,9 @@ else:
                 for line in file.readlines()[1:]: # don't need the first line with headers
                     try:
                         source_ip, count, events_per_sec = line.strip().split(',')
-                        if 'Asia Prod' in filename:
+                        if 'Asia' in filename:
                             content.append([ipaddress.ip_address(source_ip), "Asia Prod\n"])
-                        elif 'NA Prod' in filename:
+                        elif 'NA' in filename:
                             content.append([ipaddress.ip_address(source_ip), "NA Prod\n"])
                     except:
                         print(f"Unexpected content in file <{filename}>: \nLine: {line}")
